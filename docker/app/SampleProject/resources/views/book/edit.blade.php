@@ -24,7 +24,7 @@
           @method('put')
           <div class="form-group">
             <label for="readed_on">読了日</label>
-            <input type="date" name="readed_on" class="form-control" id="readed_on"  value="{{$book->readed_on}}">
+            <input type="date" name="readed_on" class="form-control" id="readed_on" value="{{old('readed_on', $book->readed_on)}}">
           </div>
 
           <div class="form-group">
