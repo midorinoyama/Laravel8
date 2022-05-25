@@ -75,9 +75,9 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Book $book)
     {
-        //
+        return view('book.edit', compact('book'));
     }
 
     /**
@@ -87,9 +87,25 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Book $book)
     {
-        //
+        $inputs = $request->validate([
+            'book_title' => 'required|max:100',
+            'author'     => 'required|max:100',
+            'title'      => 'required|max:100',
+            'body'       => 'required|max:500',
+            //明日からの日にちを選べないようにしたい
+            //'readed_on'  => 'required|after:today',
+        ]);
+
+        $book->book_title = $inputs['book_title'];
+        $book->author = $inputs['author'];
+        $book->title = $inputs['title'];
+        $book->body = $inputs['body'];
+        $book->readed_on = $request->readed_on;
+        //$book->readed_on = $inputs['readed_on'];
+        $book->save();
+        return back()->with('message', '投稿を更新しました');
     }
 
     /**
