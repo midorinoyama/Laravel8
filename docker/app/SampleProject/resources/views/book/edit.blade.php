@@ -13,13 +13,7 @@
         </div>
       @endif
 
-      @if(session('message'))
-        <div class="alert alert-success">
-          {{session('message')}}
-        </div>
-      @endif
-
-        <form method="post" action="{{route('book.update', $book)}}">
+        <form method="post" action="{{route('book.update', $book->id)}}">
           @csrf
           @method('put')
           <div class="form-group">
@@ -50,8 +44,14 @@
           <div class="form-group text-center">
             <button type="submit" class="btn btn-primary">この内容で投稿する</button>
           </div>
-
         </form>
+        <div class="form-group text-center mt-5">
+          <form method="post" action="{{route('book.destroy', $book)}}">
+            @csrf
+            @method('delete')
+            <button type="submit" class="btn btn-danger" onClick="return confirm('本当に削除しますか？')">投稿を削除する</button>
+          </form>
+        </div>
   </div>
 </div>
 @endsection

@@ -6,8 +6,14 @@
   </div>
 
   <div class="col-md-7">
+    @if(session('message'))
+      <div class="alert alert-success">
+        {{session('message')}}
+      </div>
+    @endif
+
     <div class="field">
-        <h1 class="heading">{{$book->user->name}}さんの投稿</h1>
+        <h1 class="heading">{{$book->user->name??"匿名"}}さんの投稿</h1>
         <p>本の題名「{{$book->book_title}}」</p>
         <p>著者:{{$book->author}}</p>
         <p>読了日:{{$book->readed_on->format("Y/m/d")}}</p>

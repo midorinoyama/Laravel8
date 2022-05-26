@@ -3,6 +3,11 @@
 
 <h1>投稿一覧</h1>
 <div class="row">
+  @if(session('message'))
+    <div class="alert alert-success">
+      {{session('message')}}
+    </div>
+  @endif
   <div class="cok-md-3 offset-md-2"></div>
   <div class="col-md-7">
     <table>

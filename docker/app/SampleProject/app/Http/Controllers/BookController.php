@@ -38,22 +38,20 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $inputs = $request->validate([
+            'readed_on'  => 'required|date|before:tomorrow',
             'book_title' => 'required|max:100',
             'author'     => 'required|max:100',
             'title'      => 'required|max:100',
             'body'       => 'required|max:500',
-            //明日からの日にちを選べないようにしたい
-            //'readed_on'  => 'required|after:today',
         ]);
 
         $book = new Book();
         $book->user_id = auth()->user()->id;
+        $book->readed_on = $inputs['readed_on'];
         $book->book_title = $inputs['book_title'];
         $book->author = $inputs['author'];
         $book->title = $inputs['title'];
         $book->body = $inputs['body'];
-        $book->readed_on = $request->readed_on;
-        //$book->readed_on = $inputs['readed_on'];
         $book->save();
         return back()->with('message', '投稿を保存しました');
     }
@@ -90,22 +88,20 @@ class BookController extends Controller
     public function update(Request $request, Book $book)
     {
         $inputs = $request->validate([
+            'readed_on'  => 'required|date|before:tomorrow',
             'book_title' => 'required|max:100',
             'author'     => 'required|max:100',
             'title'      => 'required|max:100',
             'body'       => 'required|max:500',
-            //明日からの日にちを選べないようにしたい
-            //'readed_on'  => 'required|after:today',
         ]);
 
+        $book->readed_on = $inputs['readed_on'];
         $book->book_title = $inputs['book_title'];
         $book->author = $inputs['author'];
         $book->title = $inputs['title'];
         $book->body = $inputs['body'];
-        $book->readed_on = $request->readed_on;
-        //$book->readed_on = $inputs['readed_on'];
         $book->save();
-        return back()->with('message', '投稿を更新しました');
+        return redirect()->route('book.show', compact('book'))->with('message', '投稿を更新しました');
     }
 
     /**
@@ -114,8 +110,9 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return redirect()->route('book.index')->with('message', '投稿を削除しました');
     }
 }

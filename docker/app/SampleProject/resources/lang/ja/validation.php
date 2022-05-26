@@ -154,13 +154,13 @@ return [
     */
 
     'attributes' => [
-        'password' => 'パスワード',
+        'password'   => 'パスワード',
         'book_title' => '本の題名',
-        'author' => '本の著者',
-        'title' => 'タイトル',
-        'body' => 'コメント',
-        'readed_on' => '読了日',
-        'today' => '今日',
+        'author'     => '本の著者',
+        'title'      => 'タイトル',
+        'body'       => 'コメント',
+        'readed_on'  => '読了日',
+        'tomorrow'   => '明日'
     ],
 
 ];
