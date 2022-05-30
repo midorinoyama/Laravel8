@@ -20,6 +20,7 @@ class Book extends Model
     //$fillableが多い場合は$guardedも可能（id=編集してはいけない項目の設定）
     //protected $guarded = ['id'];
 
+    //formatの許可
     protected $dates = [
         'readed_on'
     ];
@@ -27,5 +28,11 @@ class Book extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    //１つの投稿は複数のコメントを持てる
+    public function bookComments()
+    {
+        return $this->hasMany(BookComment::class);
     }
 }

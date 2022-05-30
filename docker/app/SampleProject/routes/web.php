@@ -22,3 +22,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('/book', 'BookController');
+
+Route::post('/book/book_comment/store', 'BookCommentController@store')->name('book_comment.store');
+Route::delete('/book/book_comment/{book_comment}', 'BookCommentController@destroy')->name('book_comment.destroy');
