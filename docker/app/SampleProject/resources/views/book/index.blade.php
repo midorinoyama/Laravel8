@@ -1,16 +1,16 @@
 @extends('layouts.app')
 @section('content')
 
-<h1>投稿一覧</h1>
+<h1 class="text-center">投稿一覧</h1>
 <div class="row">
   @if(session('message'))
     <div class="alert alert-success">
       {{session('message')}}
     </div>
   @endif
-  <div class="cok-md-3 offset-md-2"></div>
-  <div class="col-md-7">
-    <table>
+  <div class="col-md-3 offset-md-1"></div>
+  <div class="col-md-8">
+    <table class="table">
       <thead>
         <tr>
           <th>ユーザー</th>
@@ -29,7 +29,7 @@
             <td>{{$book->user->name}}</td>
             <td><a href="{{route('book.show', $book)}}">{{$book->book_title}}</a></td>
             <td>{{$book->author}}</td>
-            <td>{{$book->title}}</td>
+            <td>{{Str::limit($book->title, 18, '...')}}</td>
             <td>{{$book->readed_on->format("Y/m/d")}}</td>
             <td>{{$book->created_at->diffForHumans()}}</td>
           </tr>

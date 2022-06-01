@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Favorite;
 
 class BookController extends Controller
 {
@@ -64,7 +65,8 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        return view('book.show', compact('book'));
+        $favorite = Favorite::where('book_id', $book->id)->where('user_id', auth()->user()->id)->first();
+        return view('book.show', compact('book', 'favorite'));
     }
 
     /**
@@ -113,6 +115,7 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         $book->bookComments()->delete();
+        $book->favorites()->delete();
         $book->delete();
         return redirect()->route('book.index')->with('message', '投稿を削除しました');
     }
