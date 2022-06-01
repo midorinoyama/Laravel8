@@ -21,10 +21,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('/book', 'BookController');
+Route::resource('/books', 'BookController');
 
-Route::post('/book/book_comment/store', 'BookCommentController@store')->name('book_comment.store');
-Route::delete('/book/book_comment/{book_comment}', 'BookCommentController@destroy')->name('book_comment.destroy');
+Route::post('/books/book_comment/store', 'BookCommentController@store')->name('book_comment.store');
+Route::delete('/books/book_comment/{book_comment}', 'BookCommentController@destroy')->name('book_comment.destroy');
 
 Route::get('/reply/favorite/{book}', 'FavoriteController@favorite')->name('favorite');
 Route::get('/reply/unfavorite/{book}', 'FavoriteController@unfavorite')->name('unfavorite');
+
+Route::resource('users', 'UserController');

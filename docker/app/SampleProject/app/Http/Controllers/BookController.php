@@ -17,7 +17,7 @@ class BookController extends Controller
     {
         $books = Book::orderBy('id', 'desc')->get();
         $user  = auth()->user();
-        return view('book.index', compact('books', 'user'));
+        return view('books.index', compact('books', 'user'));
     }
 
     /**
@@ -27,7 +27,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('book.create');
+        return view('books.create');
     }
 
     /**
@@ -66,7 +66,7 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $favorite = Favorite::where('book_id', $book->id)->where('user_id', auth()->user()->id)->first();
-        return view('book.show', compact('book', 'favorite'));
+        return view('books.show', compact('book', 'favorite'));
     }
 
     /**
@@ -77,7 +77,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        return view('book.edit', compact('book'));
+        return view('books.edit', compact('book'));
     }
 
     /**
@@ -103,7 +103,7 @@ class BookController extends Controller
         $book->title = $inputs['title'];
         $book->body = $inputs['body'];
         $book->save();
-        return redirect()->route('book.show', compact('book'))->with('message', '投稿を更新しました');
+        return redirect()->route('books.show', compact('book'))->with('message', '投稿を更新しました');
     }
 
     /**
@@ -117,6 +117,6 @@ class BookController extends Controller
         $book->bookComments()->delete();
         $book->favorites()->delete();
         $book->delete();
-        return redirect()->route('book.index')->with('message', '投稿を削除しました');
+        return redirect()->route('books.index')->with('message', '投稿を削除しました');
     }
 }
