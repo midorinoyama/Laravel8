@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-6 my-auto mx-auto">
       <h1 class="head-title">投稿編集</h1>
-      @if($errors->any())
+      {{--@if($errors->any())
         <div class="alert alert-danger">
           <ul>
             @foreach($errors->all() as $error)
@@ -12,7 +12,7 @@
           </ul>
         </div>
       @endif
-
+--}}
         <form method="post" action="{{route('books.update', $book->id)}}">
           @csrf
           @method('put')

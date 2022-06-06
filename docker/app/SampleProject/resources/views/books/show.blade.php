@@ -10,7 +10,7 @@
       </div>
     @endif
       <div class="field">
-          <h1 class="book-heading">{{$book->user->name??"匿名"}}さんの投稿</h1>
+          <h1 class="book-heading"><a href="{{route('users.show', $book->user_id)}}">{{$book->user->name??"匿名"}}</a>さんの投稿</h1>
           <p>本の題名「{{$book->book_title}}」</p>
           <p>著者:{{$book->author}} |
             読了日:{{$book->readed_on->format("Y/m/d")}}</p>
@@ -31,11 +31,11 @@
         <!-- もし$favoriteがあれば＝ユーザーが「いいね」をしていた場合 -->
         @if($favorite)
         <!-- 「いいね」取り消しボタンを表示 -->
-          <a href="{{route('unfavorite', $book)}}" class="fa-regular fa-thumbs-up thumbs_yellow">
+          <a href="{{route('unfavorite', $book)}}" class="fa-solid fa-thumbs-up">
             <span>{{$book->favorites->count()}}</span></a>
         @else
         <!-- もしユーザーが「いいね」していなければ「いいね」ボタンを表示 -->
-        <a href="{{route('favorite', $book)}}" class="fa-regular fa-thumbs-up thumbs_grey">
+        <a href="{{route('favorite', $book)}}" class="fa-thin fa-thumbs-up">
         <span>{{$book->favorites->count()}}</span></a>
         @endif
       @endunless
